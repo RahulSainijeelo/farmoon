@@ -1,0 +1,10 @@
+{
+  "needs_irrigation": "Irrigate {zone} today, approximately {minutes} minutes.",
+  "inspect_leaf": "Disease suspected in {zone}. Please send a leaf photo.",
+  "weed_patch": "Weed patch found in {zone}. Spot spray only this area.",
+  "spray_needs_approval": "Operator approval required before any spray action.",
+  "not_sure": "Not confident. Please inspect the field in person.",
+  "all_ok": "All conditions normal. No action needed.",
+  "verified_resolved": "Issue resolved in {zone}.",
+  "verified_persist": "Issue persists in {zone}. Inspect again."
+}

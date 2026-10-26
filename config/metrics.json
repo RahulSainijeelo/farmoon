@@ -1,0 +1,66 @@
+{
+  "status": "PROPOSED",
+  "note": "Baseline and field metrics require multi-season trial data. No unverified savings claimed.",
+  "indicators": [
+    {
+      "id": "water",
+      "indicator": "Water use per hectare",
+      "baseline": "No field data",
+      "withSystem": "No field data",
+      "change": "Pending trial",
+      "simulatedBaseline": "4,800 m³ / ha",
+      "simulatedWithSystem": "3,450 m³ / ha",
+      "simulatedChange": "-28% reduction"
+    },
+    {
+      "id": "chemical",
+      "indicator": "Chemical spray per hectare",
+      "baseline": "No field data",
+      "withSystem": "No field data",
+      "change": "Pending trial",
+      "simulatedBaseline": "3.8 L / ha (blanket)",
+      "simulatedWithSystem": "1.4 L / ha (spot spray)",
+      "simulatedChange": "-63% reduction"
+    },
+    {
+      "id": "delay",
+      "indicator": "Stress alert delay",
+      "baseline": "No field data",
+      "withSystem": "No field data",
+      "change": "Pending trial",
+      "simulatedBaseline": "4 to 7 days (visual)",
+      "simulatedWithSystem": "< 4 hours (telemetry)",
+      "simulatedChange": "-85% faster"
+    },
+    {
+      "id": "precision",
+      "indicator": "Hotspot detection precision",
+      "baseline": "No field data",
+      "withSystem": "No field data",
+      "change": "Pending trial",
+      "simulatedBaseline": "55% (farmer scouting)",
+      "simulatedWithSystem": "88% (drone + sensor)",
+      "simulatedChange": "+33% accuracy"
+    },
+    {
+      "id": "recall",
+      "indicator": "Disease patch recall",
+      "baseline": "No field data",
+      "withSystem": "No field data",
+      "change": "Pending trial",
+      "simulatedBaseline": "40% (early stage)",
+      "simulatedWithSystem": "82% (multispectral)",
+      "simulatedChange": "+42% coverage"
+    },
+    {
+      "id": "cost",
+      "indicator": "Input cost per acre",
+      "baseline": "No field data",
+      "withSystem": "No field data",
+      "change": "Pending trial",
+      "simulatedBaseline": "₹ 14,200 / acre",
+      "simulatedWithSystem": "₹ 10,800 / acre",
+      "simulatedChange": "-24% saving"
+    }
+  ]
+}

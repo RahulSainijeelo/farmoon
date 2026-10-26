@@ -25,7 +25,8 @@
 - **Text Constraints**:
   - Labels: Maximum 3 words.
   - Status messages: Maximum 6 words (e.g., `Soil moisture below threshold: 18%`).
-  - Zero conversational or explanatory paragraphs.
+  - Plan views exception: The Hardware, Fund, Status, and Metrics views may use table cells of up to 8 words. The Farmer view uses full Hindi sentences.
+  - Zero conversational or marketing paragraphs.
 
 ## 4. Custom SVG Icon Set
 Use strictly 24x24 viewBox, `fill="none"`, `stroke="currentColor"`, `stroke-width="1.5"`.

@@ -1,0 +1,34 @@
+[
+  {
+    "nodeId": "WEATHER-01",
+    "zoneId": "A1",
+    "tempC": 33.5,
+    "humidity": 46.0,
+    "rainfall": 0.0,
+    "solarRadiation": 790.0
+  },
+  {
+    "nodeId": "WEATHER-02",
+    "zoneId": "B2",
+    "tempC": 36.8,
+    "humidity": 39.0,
+    "rainfall": 0.0,
+    "solarRadiation": 860.0
+  },
+  {
+    "nodeId": "WEATHER-03",
+    "zoneId": "C4",
+    "tempC": 32.1,
+    "humidity": 51.0,
+    "rainfall": 0.0,
+    "solarRadiation": 720.0
+  },
+  {
+    "nodeId": "WEATHER-04",
+    "zoneId": "D3",
+    "tempC": 31.4,
+    "humidity": 55.0,
+    "rainfall": 0.0,
+    "solarRadiation": 680.0
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "crops": [
+    {
+      "id": "demo_crop",
+      "label": "Demo crop",
+      "status": "PLACEHOLDER",
+      "soilMoistureMinPct": null,
+      "soilMoistureMaxPct": null,
+      "tempMaxC": null,
+      "humidityMaxPct": null,
+      "solarRadiationMaxWm2": null,
+      "source": "Fill from agronomist or KVK guidance"
+    }
+  ]
+}

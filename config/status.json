@@ -1,0 +1,22 @@
+{
+  "updated": "2026-10-25",
+  "rows": [
+    { "area": "Pipeline workspace", "detail": "Ingest, process, report, verify", "status": "BUILT" },
+    { "area": "Soil telemetry engine", "detail": "Threshold rules", "status": "BUILT" },
+    { "area": "Water need engine", "detail": "Threshold rules", "status": "BUILT" },
+    { "area": "Climate stress engine", "detail": "Threshold rules", "status": "BUILT" },
+    { "area": "Sensor fusion engine", "detail": "Combines available indicators", "status": "BUILT" },
+    { "area": "Weed mapping engine", "detail": "Output shape only, no model", "status": "SIMULATED" },
+    { "area": "Crop disease engine", "detail": "Output shape only, no model", "status": "SIMULATED" },
+    { "area": "Offline storage", "detail": "IndexedDB, local API fallback", "status": "BUILT" },
+    { "area": "Spray safety gate", "detail": "Four confirmations, remote stop", "status": "BUILT" },
+    { "area": "Verification state", "detail": "Awaiting follow-up scan", "status": "BUILT" },
+    { "area": "GeoJSON and actuator export", "detail": "Synthetic coordinates", "status": "SIMULATED" },
+    { "area": "Trained AI models", "detail": "Needs labelled field images", "status": "PROPOSED" },
+    { "area": "Sensor nodes", "detail": "Not built, funded in phase 1", "status": "PROPOSED" },
+    { "area": "LoRa gateway", "detail": "Not built, funded in phase 1", "status": "PROPOSED" },
+    { "area": "Drone mapping", "detail": "Not built, funded in phase 2", "status": "PROPOSED" },
+    { "area": "Real actuator commands", "detail": "Recorded locally only", "status": "PROPOSED" },
+    { "area": "Field validation", "detail": "No real plot tested yet", "status": "PROPOSED" }
+  ]
+}

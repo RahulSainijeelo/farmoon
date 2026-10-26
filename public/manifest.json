@@ -1,0 +1,16 @@
+{
+  "name": "Soil-to-Sky Field System",
+  "short_name": "SoilToSky",
+  "description": "Offline-first agronomic edge field system",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#1b4332",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

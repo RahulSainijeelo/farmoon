@@ -1,0 +1,133 @@
+{
+  "status": "PROPOSED",
+  "layers": [
+    {
+      "id": "sky",
+      "label": "Sky layer",
+      "icon": "icon-sky",
+      "parts": [
+        "Survey drone with RGB camera",
+        "Thermal or multispectral camera (phase 2 option)"
+      ],
+      "build": "Certified operator flies survey missions. Images are stitched into one geo-referenced map and uploaded to the gateway.",
+      "test": "Check image overlap and GPS error on a marked plot",
+      "hardwareSpec": {
+        "platform": "Quad-rotor survey airframe (carbon fiber 450mm)",
+        "payload": "24MP RGB mechanical shutter camera + Downwelling light sensor",
+        "flightSpecs": "Altitude 40m AGL, 75% forward overlap, 70% side overlap, GSD ~1.2cm/px",
+        "georeferencing": "RTK GNSS / Ground Control Points (GCP) with EXIF geotagging",
+        "pipeline": "Photogrammetry orthomosaic -> NDVI / canopy extraction -> GeoJSON zone grid"
+      }
+    },
+    {
+      "id": "ground",
+      "label": "Ground layer",
+      "icon": "icon-soil",
+      "parts": [
+        "ESP32 LoRa board",
+        "Capacitive soil moisture probe",
+        "Temperature and humidity sensor",
+        "Solar panel, battery, sealed box"
+      ],
+      "build": "Each node reads sensors on a timer, sends a short packet over LoRa, then sleeps to save power.",
+      "test": "Calibrate moisture against oven-dried soil samples",
+      "hardwareSpec": {
+        "mcu": "ESP32-WROOM-32U with SX1276 LoRa transceiver (868/865 MHz IN865 band)",
+        "sensors": "Capacitive Soil Moisture v1.2 (analog ADC1), SHT31 Temp/RH (I2C 0x44), BH1750 Lux (I2C 0x23)",
+        "power": "6V 2W Monocrystalline solar panel + TP4056 charger + 18650 3400mAh Li-ion cell",
+        "dutyCycle": "15-minute wake interval (3 sec active @ 120mA, 897 sec deep sleep @ 15µA)",
+        "enclosure": "IP67 weather-sealed polycarbonate box with PG7 cable glands and stainless steel probe prongs"
+      }
+    },
+    {
+      "id": "gateway",
+      "label": "Edge gateway",
+      "icon": "icon-engine",
+      "parts": [
+        "Raspberry Pi",
+        "LoRa receiver board",
+        "Power supply and enclosure"
+      ],
+      "build": "Runs this same web app offline, stores readings, syncs to cloud when internet returns.",
+      "test": "Run a full day with the internet unplugged",
+      "hardwareSpec": {
+        "processor": "Raspberry Pi 4 Model B (4GB RAM) or Raspberry Pi 5",
+        "radio": "SX1302 8-channel LoRaWAN / multi-node LoRa HAT with +27dBm output",
+        "networking": "Local Wi-Fi Access Point (SSID: SoilToSky-Edge) for tablet/laptop connectivity without internet",
+        "softwareStack": "Debian Linux, local Node.js Next.js runtime, SQLite & IndexedDB store-and-forward queue",
+        "powerSupply": "12V 7Ah sealed lead-acid battery with MPPT solar charge controller for 24/7 autonomous run"
+      }
+    },
+    {
+      "id": "action",
+      "label": "Action layer",
+      "icon": "icon-action",
+      "parts": [
+        "Relay board and irrigation valve",
+        "Spray prescription export",
+        "Small inspection robot (prototype)"
+      ],
+      "build": "Valve opens on an approved irrigation packet. Spray maps go to a licensed operator. Robot is a phase 2 prototype.",
+      "test": "Dry run with plain water only",
+      "hardwareSpec": {
+        "irrigation": "12V DC latching solenoid valve driven by MOSFET H-bridge with pulse control (zero idle power)",
+        "sprayInterlock": "4-point digital confirmation (wind speed, dosage, PPE, kill switch) before MAVLink/GeoJSON emission",
+        "robotChassis": "Differential-drive rubber track robot with ESP32-CAM and ultrasonic obstacle avoidance",
+        "safetySwitch": "Hardware emergency latching kill-switch button + software remote stop packet override"
+      }
+    }
+  ],
+  "dataFlow": [
+    "Sensor node",
+    "LoRa",
+    "Gateway",
+    "Engines",
+    "Approval",
+    "Actuator",
+    "Verify scan"
+  ],
+  "packetSpecification": {
+    "totalBytes": 12,
+    "fields": [
+      { "bytes": "0-1", "name": "Node ID", "type": "uint16", "description": "Unique sensor hardware node index" },
+      { "bytes": "2-3", "name": "Soil Moisture", "type": "uint16", "description": "Raw ADC scaled to 0-100% moisture" },
+      { "bytes": "4-5", "name": "Temperature", "type": "int16", "description": "T in Celsius * 10 (-40.0 to +85.0 C)" },
+      { "bytes": "6-7", "name": "Humidity", "type": "uint16", "description": "Relative humidity * 10 (0.0 to 100.0%)" },
+      { "bytes": "8-9", "name": "Solar Radiation", "type": "uint16", "description": "Surface flux in W/m2 (0 to 1500 W/m2)" },
+      { "bytes": "10", "name": "Battery Pct", "type": "uint8", "description": "Battery state of charge 0-100%" },
+      { "bytes": "11", "name": "CRC Checksum", "type": "uint8", "description": "CRC-8 error detection byte" }
+    ]
+  },
+  "connectionSteps": [
+    {
+      "step": 1,
+      "title": "Ground Sensor Node Assembly",
+      "summary": "Connect ESP32 to analog moisture probe and I2C sensors in IP67 case.",
+      "detail": "ESP32 GPIO 34 reads analog moisture voltage. GPIO 21/22 reads digital SHT31 temperature and humidity. Powered by 18650 Li-ion battery recharged by 6V solar panel via TP4056 module."
+    },
+    {
+      "step": 2,
+      "title": "LoRa 865MHz Radio Transmission",
+      "summary": "Pack sensor values into 12 bytes and transmit over long-range radio.",
+      "detail": "Node wakes every 15 minutes, broadcasts 12-byte binary packet at +14 dBm in the IN865 license-free band. Travels 1.5 to 3 km across crop foliage without cellular internet."
+    },
+    {
+      "step": 3,
+      "title": "Edge Gateway Ingest & Web Serial",
+      "summary": "Raspberry Pi LoRa HAT receives radio packets and feeds the web app.",
+      "detail": "Raspberry Pi background listener decodes the 12-byte payload to JSON and sends it to POST /api/ingest. Alternatively, plug a USB LoRa dongle into a laptop and click 'Connect LoRa' in the app via Web Serial API."
+    },
+    {
+      "step": 4,
+      "title": "Drone Survey Geotag Ingestion",
+      "summary": "Import aerial flight photos directly with EXIF GPS tags.",
+      "detail": "Survey drone photos are dropped into Stage 1 dropzone. App EXIF parser extracts GPS latitude and longitude, automatically positioning imagery on the 48-zone prescription grid."
+    },
+    {
+      "step": 5,
+      "title": "Actuator Trigger & Safety Interlock",
+      "summary": "Authorized irrigation pulses solenoid valve; spray exports MAVLink mission.",
+      "detail": "When human clicks Approve, gateway pulses an H-bridge relay for 50ms to flip 12V latching solenoid valve on the drip pipe. Remote stop kill-switch instantly locks output."
+    }
+  ]
+}

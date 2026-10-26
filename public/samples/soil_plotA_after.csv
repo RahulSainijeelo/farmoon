@@ -1,0 +1,9 @@
+nodeId,zoneId,soilMoisture,tempC,humidity,pH,diseaseRisk,weedCoveragePercent,solarRadiation,rainfall
+NODE-01,A1,57,29,63,6.4,12,6,680,0
+NODE-02,B2,48,29,58,6.3,14,7,710,0
+NODE-03,C4,45,30,55,5.8,17,11,695,0
+NODE-04,D3,51,30,59,6.6,10,5,670,0
+NODE-05,E5,42,32,49,5.5,14,9,720,0
+NODE-06,F3,61,28,66,6.3,8,4,650,0
+NODE-07,G2,47,30,57,6.5,11,6,690,0
+NODE-08,H1,54,29,60,6.2,9,5,670,0

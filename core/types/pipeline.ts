@@ -61,6 +61,7 @@ export interface Stage2Zone {
   metricValue: number | string;
   unit: string;
   confidence: number;
+  severity?: number; // 0.0 (normal) to 1.0 (extreme risk)
 }
 
 export interface RecommendedAction {
@@ -105,21 +106,27 @@ export interface ActionRecord {
   status: ActionStatus;
   requiresSafetyChecklist: boolean;
   baselineValue?: number;
+  baselineSeverity?: number;
   metricLabel?: string;
   unit?: string;
   safetyChecklist?: SafetyChecklist;
   updatedAt: number;
 }
 
+export type VerificationStatus = "RESOLVED" | "PERSISTS" | "PERSISTING" | "NEEDS_REVIEW";
+
 export interface VerificationRecord {
   id: string;
   jobId: string;
   actionId: string;
   targetZoneId: string;
-  status: "RESOLVED" | "PERSISTING";
+  status: VerificationStatus;
   metricLabel: string;
   beforeValue: number;
   afterValue: number;
+  severityBefore?: number;
+  severityAfter?: number;
+  ruleUsed?: string;
   unit: string;
   createdAt: number;
 }

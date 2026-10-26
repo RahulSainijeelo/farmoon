@@ -1,0 +1,22 @@
+{
+  "currency": "INR",
+  "status": "ESTIMATE",
+  "note": "Planning estimates from Indian retail listings. Replace with dealer quotes.",
+  "contingencyPercent": 10,
+  "items": [
+    { "id": "nodes", "label": "Sensor nodes", "basis": "8 nodes at 4,000 to 6,000 each", "amount": 40000, "phase": 1 },
+    { "id": "gateway", "label": "Edge gateway", "basis": "Raspberry Pi, LoRa receiver, power, enclosure", "amount": 15000, "phase": 1 },
+    { "id": "training", "label": "Model training", "basis": "GPU cloud credits", "amount": 15000, "phase": 1 },
+    { "id": "connectivity", "label": "Connectivity and SMS", "basis": "SIM, SMS gateway, hosting", "amount": 10000, "phase": 1 },
+    { "id": "drone", "label": "Mapping drone", "basis": "One survey camera drone, quote pending", "amount": 150000, "phase": 2 },
+    { "id": "robot", "label": "Ground robot prototype", "basis": "Chassis, motors, controller, camera", "amount": 30000, "phase": 2 },
+    { "id": "actuation", "label": "Irrigation actuation", "basis": "Valve, relay board, flow sensor", "amount": 10000, "phase": 2 },
+    { "id": "pilot", "label": "Pilot training and insurance", "basis": "Drone pilot certificate, annual insurance", "amount": 25000, "phase": 2 },
+    { "id": "trial", "label": "Field trial", "basis": "Plot access, travel, farmer support", "amount": 25000, "phase": 3 }
+  ],
+  "phases": [
+    { "phase": 1, "label": "Sense", "months": "0 to 3", "outputs": ["8 sensor nodes reporting over LoRa", "Gateway running offline", "One AI model with field accuracy"] },
+    { "phase": 2, "label": "Fly and act", "months": "3 to 6", "outputs": ["Drone map becomes zone map in the app", "Valve trigger and spray map", "Robot inspection prototype"] },
+    { "phase": 3, "label": "Prove", "months": "6 to 12", "outputs": ["Season-long trial on a farmer plot", "Water and chemical use vs baseline", "Field results reported openly"] }
+  ]
+}

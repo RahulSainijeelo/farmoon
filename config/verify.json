@@ -1,0 +1,5 @@
+{
+  "improvementRatio": 0.7,
+  "minConfidence": 0.75,
+  "ruleDescription": "Resolved if severity falls 30% and status returns to normal"
+}

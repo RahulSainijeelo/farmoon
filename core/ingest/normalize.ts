@@ -18,6 +18,8 @@ function normalizeKey(value: string): string {
     tempc: "tempC", humiditypercent: "humidity", humiditypct: "humidity", relativehumidity: "humidity",
     ph: "pH", phvalue: "pH", disease: "diseaseRisk", diseaseriskpercent: "diseaseRisk", weedcoverage: "weedCoveragePercent",
     weedpressure: "weedCoveragePercent",
+    solarradiation: "solarRadiation", radiation: "solarRadiation", lux: "solarRadiation", sunlight: "solarRadiation", solarrad: "solarRadiation",
+    rainfall: "rainfall", rain: "rainfall", precipitation: "rainfall",
   };
   return aliases[lower] ?? key;
 }
@@ -53,7 +55,7 @@ function parseCsv(source: string): TelemetryPacket[] {
     return cells;
   };
   const headers = split(lines[0]).map(normalizeKey);
-  if (!headers.some((header) => ["nodeId", "zoneId", "soilMoisture", "tempC", "humidity", "pH", "diseaseRisk", "weedCoveragePercent"].includes(header))) {
+  if (!headers.some((header) => ["nodeId", "zoneId", "soilMoisture", "tempC", "humidity", "pH", "diseaseRisk", "weedCoveragePercent", "solarRadiation", "rainfall"].includes(header))) {
     throw new IngestError("CSV headers contain no recognized telemetry fields.", "CSV_HEADERS");
   }
   return lines.slice(1).map((line, rowIndex) => {

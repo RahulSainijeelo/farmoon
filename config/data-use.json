@@ -1,0 +1,12 @@
+{
+  "status": "PROPOSED",
+  "title": "Data use & farmer privacy",
+  "points": [
+    { "key": "What is stored", "detail": "Soil readings, microclimate data, and aerial field boundaries." },
+    { "key": "Where it is stored", "detail": "Directly on the edge gateway device and laptop IndexedDB." },
+    { "key": "Retention period", "detail": "Kept for one crop season unless deleted by the operator." },
+    { "key": "Data monetization", "detail": "Farmer telemetry is never sold or shared with commercial third parties." },
+    { "key": "Consent requirement", "detail": "Explicit written or vernacular audio consent before initial ingestion." }
+  ],
+  "legalNote": "Compliance note: Review data fiduciary obligations under the Digital Personal Data Protection (DPDP) Act, 2023 with qualified legal counsel before pilot deployment."
+}

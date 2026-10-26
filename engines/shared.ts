@@ -41,12 +41,19 @@ export function zonePolygon(index: number, zoneId?: string): [number, number][] 
   return [[south, west], [south, east], [north, east], [north, west], [south, west]];
 }
 
+export function severityForStatus(status: ZoneStatus, normalizedOffset = 0): number {
+  if (status === "DANGER") return Math.min(1.0, Math.max(0.7, 0.8 + normalizedOffset));
+  if (status === "WARN") return Math.min(0.69, Math.max(0.35, 0.5 + normalizedOffset));
+  return Math.min(0.25, Math.max(0.02, 0.08 + normalizedOffset));
+}
+
 export function makeZones(
   input: Stage1Payload,
   metricLabel: string,
   unit: string,
   getMetric: (packet: TelemetryPacket, index: number) => number | undefined,
   classify: (value: number) => ZoneStatus,
+  getSeverity?: (value: number, status: ZoneStatus) => number,
 ): Stage2Zone[] {
   const hasAerialData = input.rawFiles.some((file) => ["RGB_IMAGE", "THERMAL_TIFF", "MULTISPECTRAL_TIFF"].includes(file.payloadType));
   const imageZoneIds = ["A1", "B2", "C4", "D3", "E5", "F3"];
@@ -59,14 +66,17 @@ export function makeZones(
     const value = getMetric(packet, index);
     if (value === undefined) return [];
     const zoneId = zoneIdFor(packet, index);
+    const status = classify(value);
+    const severity = getSeverity ? getSeverity(value, status) : severityForStatus(status);
     return [{
       zoneId,
       polygon: zonePolygon(index, zoneId),
-      status: classify(value),
+      status,
       metricLabel,
       metricValue: Math.round(value * 10) / 10,
       unit,
       confidence: input.telemetryPackets.length ? 0.86 : 0.58,
+      severity: Math.round(severity * 100) / 100,
     }];
   });
 }
